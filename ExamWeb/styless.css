@@ -1,0 +1,69 @@
+body {
+    background-color: #cd853f;
+    color: #FFFDD0;
+}
+
+.header, .footer {
+    background-color: #ffdb8b!important;
+    border-color: red!important;
+}
+
+.header a, footer a, footer p{
+    color: red!important;
+}
+
+.heading-line{
+    height: 3px; 
+    width: 300px;
+    background-color: red!important;
+}
+
+.benefits i{
+    font-size: 3rem;
+    color: red;
+}
+
+.carousel-item {
+    max-height: 550px;
+}
+
+.restaurants, .additional-options{
+    background-color: #ffdb8b!important;
+    color: #cd853f;
+}
+
+.search {
+    border-color: red!important;
+}
+
+.form-select{
+    background-color: #cd853f;
+    color: #ffdb8b!important;
+}
+
+.btn{
+    color: #ffdb8b!important;
+}
+
+.border-2 {
+    border-color: red!important;
+}
+
+.card {
+    background-color: #ffdb8b!important;
+    color: #cd853f!important;
+}
+
+.card button{
+    color: red!important;
+    border-color: red!important;
+}
+
+.card input{
+    border-color: red!important;
+}
+
+.footer i{
+    font-size: 2.5rem;
+    color: red;
+}

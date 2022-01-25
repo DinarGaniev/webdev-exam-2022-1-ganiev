@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link href="styless.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <script defer src="main.js"></script>
+
+    <title>Служба доставки</title>
+</head>
+
+<body>
+    <header class="header sticky-lg-top border-bottom border-4">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center mx-auto" href="#">
+                    <img src="Images/Millenium Falcon.png" alt="" width="100" height="auto"
+                        class="d-inline-block border rounded-circle me-3">
+                    Сокол Тысячелетия
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto row-cols-lg-5 align-items-lg-center">
+                        <li class="nav-item text-lg-center">
+                            <a class="nav-link" href="#benefits">Преимущества нашей доставки</a>
+                        </li>
+                        <li class="nav-item text-lg-center">
+                            <a class="nav-link" href="#restaurants">Предприятия общественного питания</a>
+                        </li>
+                        <li class="nav-item text-lg-center">
+                            <a class="nav-link" href="#menu">Меню</a>
+                        </li>
+                        <li class="nav-item text-lg-center">
+                            <a class="nav-link" href="#additional-options">Опции</a>
+                        </li>
+                        <li class=" nav-item text-lg-center">
+                            <a class="nav-link" href="#">Административная панель</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="alerts">
+                <div class="alert alert-dismissible fade show alert-template d-none" role="alert">
+                    <span class="msg">
+                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    </span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+        <section>
+            <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="Images/1cr.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Images/2cr.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Images/3cr.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Следующий</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="benefits py-5 container" id="benefits">
+            <div class="container text-center">
+                <h2 class="mb-3">Преимущества нашей доставки</h2>
+                <div class="heading-line mx-auto mb-3"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 text-center mb-4">
+                    <i class="bi bi-moon"></i>
+                    <p>Работаем 24 часа</p>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center mb-4">
+                    <i class="bi bi-speedometer2"></i>
+                    <p>Доставка в течении 50 минут</p>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center mb-4">
+                    <i class="bi bi-cash"></i>
+                    <p>Недорогая доставка</p>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center mb-4">
+                    <i class="bi bi-basket3-fill"></i>
+                    <p>Доставка нескольких сетов одновременно</p>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center mb-4">
+                    <i class="bi bi-bag-fill"></i>
+                    <p>Используем специальные сумки</p>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center mb-4">
+                    <i class="bi bi-clock-fill"></i>
+                    <p>Доставка к определенному времени</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="restaurants py-5" id="restaurants">
+            <div class="container text-center">
+                <h2 class="mb-3">Предприятия общественного питания</h2>
+                <div class="heading-line mx-auto mb-3"></div>
+            </div>
+            <section class="search border border-2 rounded container">
+                <form class="row g-4 align-items-center">
+                    <div class="col-md-6 px-3 py-1">
+                        <label for="adminArea" class="form-label">Административный округ:</label>
+                        <select id="adminArea" class="form-select">
+                            <option selected>Не выбрано</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 px-3 py-1">
+                        <label for="district" class="form-label">Район:</label>
+                        <select id="district" class="form-select">
+                            <option selected>Не выбрано</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 px-3 py-1">
+                        <label for="type" class="form-label">Тип:</label>
+                        <select id="type" class="form-select">
+                            <option selected>Не выбрано</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 px-3 py-1">
+                        <label for="discount" class="form-label">Социальная скидка:</label>
+                        <select id="discount" class="form-select">
+                            <option selected>Не выбрано</option>
+                            <option>true</option>
+                            <option>false</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 px-3 py-1 text-lg-center align-self-end">
+                        <button type="submit" class="btn btn-primary w-75">Найти</button>
+                    </div>
+                </form>
+            </section>
+
+            <div class="container border border-2 table-responsive my-5">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">Название</th>
+                            <th scope="col">Тип</th>
+                            <th scope="col">Адрес</th>
+                            <th scope="col">Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-restaraunt">
+                    </tbody>
+                </table>
+                <nav aria-label="Пример навигации по страницам">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Предыдущая">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Следующая">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </section>
+
+        <section class="menu container py-5" id="menu">
+            <div class="text-center">
+                <h2 class="mb-3">Меню</h2>
+                <div class="heading-line mx-auto mb-3"></div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="Images/cardIMG.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Карточка №</h5>
+                        <p class="card-text text-center">Краткое описание</p>
+                        <h5 class="card-cost text-center fw-bold">100 P</h5>
+                        <div class="my-3 d-flex justify-content-evenly">
+                            <button class="btn border border-2" id="btn-minus">-</button>
+                            <input class="w-25 border border-2" type="text" placeholder="0" disabled>
+                            <button class="btn border border-2" id="btn-plus">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="additional-options py-5" id="additional-options">
+            <div class="text-center container">
+                <h2 class="mb-3">Опции</h2>
+                <div class="heading-line mx-auto mb-3"></div>
+                <div class="d-flex flex-column w-50 mx-auto">
+                    <div class="d-flex mb-1 justify-content-between border-bottom border-2">
+                        <label class="form-check-label" for="IAmAStudent">Быстрая доставка</label>
+                        <input class="my-auto ms-3" type="checkbox" id="IAmAStudent">
+                    </div>
+                    <div class="d-flex py-1 justify-content-between">
+                        <label class="form-check-label" for="FastDelivery">Социальная скидка</label>
+                        <input class="my-auto ms-3" type="checkbox" id="FastDelivery">
+                    </div>
+                    <div class="border border-2 rounded pt-1">
+                        <div class="px-2 d-flex justify-content-between flex-lg-row flex-column">
+                            <p class="my-auto">Итого: <span id="final-cost"></span></p>
+                            <button class="btn border btn-primary my-2" type="button">Оформить заказ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer border-top border-4">
+        <div class="container text-center py-3">
+            <p>OOO "Сокол Тысячелетия"</p>
+            <div class="row row-cols-lg-3 row-cols-1">
+                <div class="col">
+                    <i class="bi bi-phone-fill"></i>
+                    <a>Телефон: +7 (372) 566-80-07</a>
+                </div>
+                <div class="col">
+                    <i class="bi bi-envelope-plus"></i>
+                    <a class= "text-decoration-none" href="mailto:dinar0607@vk.com">Наша почта</a>
+                </div>
+                <div class="col">
+                    <a href="https://ru-ru.facebook.com/"><i class="bi bi-facebook px-1"></i></a>
+                    <a href="https://www.instagram.com/"><i class="bi bi-instagram px-1"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

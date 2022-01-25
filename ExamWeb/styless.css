@@ -8,7 +8,7 @@ body {
     border-color: red!important;
 }
 
-.header a, footer a, footer p{
+.header a, footer a, footer p, .vr{
     color: red!important;
 }
 
@@ -27,7 +27,7 @@ body {
     max-height: 550px;
 }
 
-.restaurants, .additional-options{
+.restaurants, .additional-options, .table {
     background-color: #ffdb8b!important;
     color: #cd853f;
 }
@@ -52,6 +52,7 @@ body {
 .card {
     background-color: #ffdb8b!important;
     color: #cd853f!important;
+    width: 18rem;
 }
 
 .card button{

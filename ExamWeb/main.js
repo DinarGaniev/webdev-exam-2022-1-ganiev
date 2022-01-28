@@ -137,8 +137,10 @@ function renderTableRestaraunts(restaurants) {
 
 function createTableRestarauntsElement(restaurant) {
     let itemTableRestaurants = document.createElement('tr');
-    itemTableRestaurants.classList.add('align-middle');
+    let restaurantId = restaurant.id;
+    itemTableRestaurants.classList.add('align-middle','place-row');
     itemTableRestaurants.classList.add('border-2');
+    itemTableRestaurants.setAttribute('restaurant-id', restaurantId);
     itemTableRestaurants.append(createElementName(restaurant));
     itemTableRestaurants.append(createElementTypeRes(restaurant));
     itemTableRestaurants.append(createElementAddress(restaurant));
@@ -182,7 +184,7 @@ function createButton() {
     return elementButton;
 }
 
-function clickHandlerBtn(event) {
+function clickHandlerBtnSearch(event) {
     downloadForm()
         .then(downloadData => dataSort(downloadData))
         .then(data => getSelect(data));
@@ -481,13 +483,78 @@ function renderLargePagination(b, items, restaurants) {
     }
 }
 
+async function downloadPlaceById(id){
+    let url = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants/" + id + "?api_key=2148a255-3abb-47c7-835c-9b499bb17e42";
+    let jsonData = await serverRequest(url);
+    return jsonData;
+}
+
+function clickHandlerBtnSelect(event) {
+    let place = event.target.closest('.place-row');
+    let placeId = place.getAttribute('restaurant-id');
+    downloadPlaceById(placeId)
+        .then(menuElement => setRestaurant(menuElement))
+        .then(arraySets => jsonMenu(arraySets, placeId));
+}
+
+function takeIdOfPlace() {
+    for (let btn of document.querySelectorAll('.place-row')) {
+        btn.onclick = clickHandlerBtnSelect;
+    }
+}
+
+function setRestaurant(restaurants) {
+    let arraySets = [];
+    arraySets.push(restaurants.set_1);
+    arraySets.push(restaurants.set_2);
+    arraySets.push(restaurants.set_3);
+    arraySets.push(restaurants.set_4);
+    arraySets.push(restaurants.set_5);
+    arraySets.push(restaurants.set_6);
+    arraySets.push(restaurants.set_7);
+    arraySets.push(restaurants.set_8);
+    arraySets.push(restaurants.set_9);
+    arraySets.push(restaurants.set_10);
+    return arraySets;
+}
+
+function jsonMenu(arraySets, placeId) {
+    let url = "./menu.json";
+    downloadForm(url)
+        .then(dataFromMenu => renderCardMenu(arraySets, dataFromMenu, placeId));
+}
+
+function renderCardMenu(arraySets, dataFromMenu, placeId) {
+    let menu = document.getElementById('menu');
+    menu.innerHTML = " ";
+    let k = 0;
+    for (let data of dataFromMenu) {
+        let card = document.querySelector('.card').cloneNode(true);
+        card.classList.remove('d-none');
+        card.classList.add('card');
+        card.querySelector('.card-img-top').setAttribute('src', data.menuImg)
+        card.querySelector('.card-title').innerHTML = data.menuName;
+        card.querySelector('.card-text').innerHTML = data.menuDesc;
+        card.querySelector('.card-cost').innerHTML = arraySets[k];
+        k++;
+        menu.appendChild(card);
+    }
+    // plusCost();
+    // minusCost();
+    // document.querySelector('.btn-order').onclick = function () {
+    //     clickHandlerPrepareModalContent(rowId);
+    // }
+}
+
 window.onload = function () {
+    let url = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants?api_key=2148a255-3abb-47c7-835c-9b499bb17e42";
     downloadData();
-    downloadForm()
+    downloadForm(url)
         .then(downloadData => dataSort(downloadData))
-        .then(restaurants => renderTableRestaraunts(restaurants));
+        .then(restaurants => renderTableRestaraunts(restaurants))
+        .then(() => takeIdOfPlace());
     let searchBtn = document.querySelector('.search-btn');
-    searchBtn.addEventListener('click', clickHandlerBtn);
+    searchBtn.addEventListener('click', clickHandlerBtnSearch);
     document.getElementById('adminArea').onchange = function () {
         let selectedAdmArea = document.getElementById("adminArea").options.selectedIndex;
         let selectedAdmAreaText = document.getElementById("adminArea").options[selectedAdmArea].text;

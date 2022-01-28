@@ -197,13 +197,13 @@
 
         </section>
 
-        <section class="menu container py-5" id="menu">
+        <section class="menu container py-5">
             <div class="text-center">
                 <h2 class="mb-3">Меню</h2>
                 <div class="heading-line mx-auto mb-3"></div>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <div class="card">
+                <div class="card d-none">
                     <img src="Images/cardIMG.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">Карточка №</h5>
@@ -216,6 +216,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center" id="menu">
             </div>
         </section>
         <section class="additional-options py-5" id="additional-options">
@@ -233,7 +235,7 @@
                     </div>
                     <div class="border border-2 rounded pt-1">
                         <div class="px-2 d-flex justify-content-between flex-lg-row flex-column">
-                            <p class="my-auto">Итого: <span id="final-cost"></span></p>
+                            <p class="my-auto">К оплате: <span id="final-cost"></span></p>
                             <button class="btn border btn-primary my-2" type="button">Оформить заказ</button>
                         </div>
                     </div>

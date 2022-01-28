@@ -33,19 +33,15 @@
                         <li class="nav-item text-lg-center">
                             <a class="nav-link" href="#benefits">Преимущества нашей доставки</a>
                         </li>
-                        <div class="vr"></div>
                         <li class="nav-item text-lg-center">
                             <a class="nav-link" href="#restaurants">Предприятия общественного питания</a>
                         </li>
-                        <div class="vr"></div>
                         <li class="nav-item text-lg-center">
                             <a class="nav-link" href="#menu">Меню</a>
                         </li>
-                        <div class="vr"></div>
                         <li class="nav-item text-lg-center">
                             <a class="nav-link" href="#additional-options">Опции</a>
                         </li>
-                        <div class="vr"></div>
                         <li class=" nav-item text-lg-center">
                             <a class="nav-link" href="#">Административная панель</a>
                         </li>
@@ -70,14 +66,14 @@
         <section>
             <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="Images/1cr.png" class="d-block w-100" alt="...">
+                    <div class="carousel-item active po">
+                        <img src="Images/cr1.png" class="d-block  w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="Images/2cr.png" class="d-block w-100" alt="...">
+                        <img src="Images/cr2.png" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="Images/3cr.png" class="d-block w-100" alt="...">
+                        <img src="Images/cr3.png" class="d-block  w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -101,27 +97,27 @@
 
             <div class="row">
                 <div class="col-lg-4 col-md-6 text-center mb-4">
-                    <i class="bi bi-moon"></i>
+                    <i class="bi bi-moon fs-1"></i>
                     <p>Работаем 24 часа</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-center mb-4">
-                    <i class="bi bi-speedometer2"></i>
+                    <i class="bi bi-speedometer2 fs-1"></i>
                     <p>Доставка в течении 50 минут</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-center mb-4">
-                    <i class="bi bi-cash"></i>
+                    <i class="bi bi-cash fs-1"></i>
                     <p>Недорогая доставка</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-center mb-4">
-                    <i class="bi bi-basket3-fill"></i>
+                    <i class="bi bi-basket3-fill fs-1"></i>
                     <p>Доставка нескольких сетов одновременно</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-center mb-4">
-                    <i class="bi bi-bag-fill"></i>
+                    <i class="bi bi-bag-fill fs-1"></i>
                     <p>Используем специальные сумки</p>
                 </div>
                 <div class="col-lg-4 col-md-6 text-center mb-4">
-                    <i class="bi bi-clock-fill"></i>
+                    <i class="bi bi-clock-fill fs-1"></i>
                     <p>Доставка к определенному времени</p>
                 </div>
             </div>
@@ -162,7 +158,7 @@
                         </select>
                     </div>
                     <div class="col-md-4 px-3 py-1 text-lg-center align-self-end">
-                        <button type="submit" class="btn btn-primary w-75">Найти</button>
+                        <button type="button" class="btn btn-primary search-btn w-75">Найти</button>
                     </div>
                 </form>
             </section>
@@ -171,18 +167,18 @@
                 <table class="table border-2 align-middle">
                     <thead>
                         <tr>
-                            <th scope="col">Название</th>
-                            <th scope="col">Тип</th>
-                            <th scope="col">Адрес</th>
-                            <th scope="col">Действие</th>
+                            <th class="w-25 text-center" scope="col">Название</th>
+                            <th class="w-20 text-center" scope="col">Тип</th>
+                            <th class="w-45 text-center" scope="col">Адрес</th>
+                            <th class="w-10 text-center" scope="col">Действие</th>
                         </tr>
                     </thead>
-                    <tbody id="table-restaraunt">
+                    <tbody id="table-restaurant">
                     </tbody>
                 </table>
                 <nav aria-label="Пример навигации по страницам">
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item">
+                    <ul class="pagination justify-content-center" id="pagination">
+                        <!-- <li class="page-item">
                             <a class="page-link" href="#" aria-label="Предыдущая">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
@@ -194,7 +190,7 @@
                             <a class="page-link" href="#" aria-label="Следующая">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
             </div>
@@ -251,16 +247,16 @@
             <p>OOO "Сокол Тысячелетия"</p>
             <div class="row row-cols-lg-3 row-cols-1">
                 <div class="col">
-                    <i class="bi bi-phone-fill"></i>
+                    <i class="bi bi-phone-fill fs-1"></i>
                     <a>Телефон: +7 (372) 566-80-07</a>
                 </div>
                 <div class="col">
-                    <i class="bi bi-envelope-plus"></i>
+                    <i class="bi bi-envelope-plus fs-1"></i>
                     <a class="text-decoration-none" href="mailto:dinar0607@vk.com">Наша почта</a>
                 </div>
                 <div class="col">
-                    <a href="https://ru-ru.facebook.com/"><i class="bi bi-facebook px-1"></i></a>
-                    <a href="https://www.instagram.com/"><i class="bi bi-instagram px-1"></i></a>
+                    <a href="https://ru-ru.facebook.com/"><i class="bi bi-facebook px-1 fs-1"></i></a>
+                    <a href="https://www.instagram.com/"><i class="bi bi-instagram px-1 fs-1"></i></a>
                 </div>
 
             </div>

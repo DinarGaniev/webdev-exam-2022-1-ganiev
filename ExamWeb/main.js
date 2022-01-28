@@ -122,22 +122,22 @@ function dataSort(jsonData) {
 
 //Формирование таблицы//
 function renderTableRestaraunts(restaurants) {
-    let tableRestaraunts = document.getElementById('table-restaraunt');
+    let tableRestaraunts = document.getElementById('table-restaurant');
     let i = 0;
     for (let restaurant of restaurants) {
-        if (i == 10) {
+        if (i == 20) {
             break;
         } else {
             tableRestaraunts.append(createTableRestarauntsElement(restaurant));
             i++;
         }
     }
+    renderPaginationBtn(restaurants)
 }
 
 function createTableRestarauntsElement(restaurant) {
     let itemTableRestaurants = document.createElement('tr');
     itemTableRestaurants.classList.add('align-middle');
-    itemTableRestaurants.classList.add('border-2');
     itemTableRestaurants.classList.add('border-2');
     itemTableRestaurants.append(createElementName(restaurant));
     itemTableRestaurants.append(createElementTypeRes(restaurant));
@@ -148,24 +148,28 @@ function createTableRestarauntsElement(restaurant) {
 
 function createElementName(restaurant) {
     let itemName = document.createElement('td');
+    itemName.classList.add('text-center');
     itemName.innerHTML = restaurant.name;
     return itemName;
 }
 
 function createElementTypeRes(restaurant) {
     let itemType = document.createElement('td');
+    itemType.classList.add('text-center');
     itemType.innerHTML = restaurant.typeObject;
     return itemType;
 }
 
 function createElementAddress(restaurant) {
     let itemAddress = document.createElement('td');
+    itemAddress.classList.add('text-center');
     itemAddress.innerHTML = restaurant.address;
     return itemAddress;
 }
 
 function createElementButton() {
     let itemButton = document.createElement('td');
+    itemButton.classList.add('text-center');
     itemButton.append(createButton());
     return itemButton;
 }
@@ -178,10 +182,318 @@ function createButton() {
     return elementButton;
 }
 
+function clickHandlerBtn(event) {
+    downloadForm()
+        .then(downloadData => dataSort(downloadData))
+        .then(data => getSelect(data));
+}
+
+//Снизу функции для поиска заведений//
+//Функция для взятия из полей поиска информации//
+function getSelect(data) {
+    let arrayFilter = new Map();
+    let selectAdmArea = document.getElementById('adminArea').options.selectedIndex;
+    let selectAdmAreaTxt = document.getElementById('adminArea').options[selectAdmArea].text;
+    arrayFilter.set('admArea', selectAdmAreaTxt);
+    // if (selectAdmAreaTxt != "Не выбрано") {
+    //     arrayFilter.set('admArea', selectAdmAreaTxt)
+    // };
+    let selectDistrict = document.getElementById('district').options.selectedIndex;
+    let selectDistrictTxt = document.getElementById('district').options[selectDistrict].text;
+    arrayFilter.set('district', selectDistrictTxt);
+    // if (selectDistrictTxt != "Не выбрано") {
+    //     arrayFilter.set('district', selectDistrictTxt)
+    // };
+    let selectType = document.getElementById('type').options.selectedIndex;
+    let selectTypeTxt = document.getElementById('type').options[selectType].text;
+    arrayFilter.set('typeObject', selectTypeTxt)
+    // if (selectTypeTxt != "Не выбрано") {
+    //     arrayFilter.set('typeObject', selectTypeTxt)
+    // };
+    let selectSocial = document.getElementById('discount').options.selectedIndex;
+    let selectSocialTxt = document.getElementById('discount').options[selectSocial].text;
+    arrayFilter.set('socialPrivileges', selectSocialTxt)
+    // if (selectSocialTxt != "Не выбрано") {
+    //     arrayFilter.set('socialPrivileges', selectSocialTxt)
+    // };
+    renderNewTable(data, arrayFilter);
+}
+
+//Функция для создания списка округов, которые нужны будут для сравнения//
+function selectedAdmAreaList(records) {
+    let arrayAdmArea = [0];
+    let flag;
+    for (let record of records) {
+        for (let i = 0; i < arrayAdmArea.length; i++) {
+            if (record.admArea != arrayAdmArea[i]) {
+                flag = true;
+            } else {
+                flag = false;
+                break;
+            }
+
+        }
+        if (flag == true) {
+            flag = 0;
+            arrayAdmArea.push(record.admArea);
+        }
+    }
+    return arrayAdmArea;
+}
+
+//Функция для создания списка раайнов, которые нужны будут для сравнения//
+function selectedDistrictList(records) {
+    let arrayDistrict = [0];
+    let flag;
+    for (let record of records) {
+        for (let i = 0; i < arrayDistrict.length; i++) {
+            if (record.district != arrayDistrict[i]) {
+                flag = true;
+            } else {
+                flag = false;
+                break;
+            }
+
+        }
+        if (flag == true) {
+            flag = 0;
+            arrayDistrict.push(record.district);
+        }
+    }
+    return arrayDistrict;
+}
+
+//Функция для создания списка типов заведений, которые нужны будут для сравнения//
+function selectedTypeList(records) {
+    let arrayType = [0];
+    let flag;
+    for (let record of records) {
+        for (let i = 0; i < arrayType.length; i++) {
+            if (record.typeObject != arrayType[i]) {
+                flag = true;
+            } else {
+                flag = false;
+                break;
+            }
+
+        }
+        if (flag == true) {
+            flag = 0;
+            arrayType.push(record.typeObject);
+        }
+    }
+    return arrayType;
+}
+
+//Функция для создания новой таблицы по выбранным условиям//
+function renderNewTable(restaurants, arrayFilter) {
+    let tableRestaraunts = document.getElementById('table-restaurant');
+    tableRestaraunts.innerHTML = " ";
+    document.getElementById('pagination').innerHTML = " ";
+    let i = 0;
+    let newDataSort = [];
+    let arrayAdmArea = selectedAdmAreaList(restaurants);
+    let arrayDistrict = selectedDistrictList(restaurants);
+    let arrayType = selectedTypeList(restaurants);
+    let arraySocial = ['true', 'false', 'Не выбрано'];
+
+    if (arrayFilter.get("admArea") != "Не выбрано") arrayAdmArea = [arrayFilter.get("admArea")];
+    if (arrayFilter.get("district") != "Не выбрано") arrayDistrict = [arrayFilter.get("district")];
+    if (arrayFilter.get("typeObject") != "Не выбрано") arrayType = [arrayFilter.get("typeObject")];
+    if (arrayFilter.get("socialPrivileges") != "Не выбрано") arraySocial = [String(arrayFilter.get("socialPrivileges"))];
+
+    for (let restaurant of restaurants) {
+        if (arrayAdmArea.includes(restaurant.admArea) &&
+            arrayDistrict.includes(restaurant.district) &&
+            arrayType.includes(restaurant.typeObject) &&
+            arraySocial.includes(String(restaurant.socialPrivileges))) {
+            newDataSort.push(restaurant);
+            // tableRestaraunts.append(createTableRestarauntsElement(restaurant));
+        }
+        // if (i == 20) {
+        //     break;
+        // } else {
+        //     if (arrayAdmArea.includes(restaurant.admArea) &&
+        //         arrayDistrict.includes(restaurant.district) &&
+        //         arrayType.includes(restaurant.typeObject) &&
+        //         arraySocial.includes(String(restaurant.socialPrivileges))) {
+        //         newDataSort.push(restaurant);
+        //         // tableRestaraunts.append(createTableRestarauntsElement(restaurant));
+        //         i++;
+        //     }
+        // }
+    }
+    renderPaginationBtn(newDataSort);
+}
+
+//Функция для обновления райнов по выбранному округу//
+function renderNewDistrictList(records, selectedAdmAreaText) {
+    let districtList = document.getElementById("district");
+    districtList.innerHTML = " ";
+    districtList.append(EmptyDistrictListItem());
+    let arrayDistrict = [0];
+    let flag;
+    for (let record of records) {
+        for (let i = 0; i < arrayDistrict.length; i++) {
+            if (record.district != arrayDistrict[i]) {
+                flag = true;
+            }
+            else {
+                flag = false;
+                break;
+            }
+        }
+        if (flag == true && selectedAdmAreaText == record.admArea) {
+            districtList.append(createDistrictElement(record));
+            flag = 0;
+            arrayDistrict.push(record.district);
+        }
+    }
+}
+
+function EmptyDistrictListItem() {
+    let itemElement = document.createElement('option');
+    itemElement.innerHTML = "Не выбрано";
+    return itemElement;
+}
+
+//Пагинаця//
+function renderPaginationBtn(restaurants) {
+    const strOnPage = 20; // количество строк в таблице
+    const numOfBtn = Math.ceil(restaurants.length / strOnPage) // количество кнопок
+    let pagination = document.getElementById('pagination');
+    let items = [];
+    for (let i = 1; i <= numOfBtn; i++) {
+        // let liBtn = document.createElement('li');
+        // liBtn.classList.add('page-item')
+        let btn = document.createElement('button');
+        btn.classList.add('btn', 'btn-primary', 'm-2');
+        btn.innerHTML = i;
+        // items.push(liBtn);
+        items.push(btn);
+    }
+    renderFirstlyPagination(items, restaurants);
+    setPaginationBtnOnPage(items[0], items, restaurants);
+    addEventOnButtons(items, restaurants);
+}
+
+function renderFirstlyPagination(items, restaurants) {
+    let pagination = document.getElementById('pagination');
+    const countBtn = 4;
+    const strOnPage = 20;
+    const numOfBtn = Math.ceil(restaurants.length / strOnPage)
+    if (numOfBtn <= countBtn) {
+        for (let i = 0; i < numOfBtn; i++) {
+            pagination.appendChild(items[i]);
+        }
+    } else {
+        for (let i = 0; i < countBtn; i++) {
+            pagination.appendChild(items[i]);
+        }
+        pagination.appendChild(items[numOfBtn - 1]);
+    }
+}
+
+function addEventOnButtons(items, restaurants) {
+    for (let item of items) {
+        item.addEventListener('click', function () {
+            setPaginationBtnOnPage(item, items, restaurants)
+        })
+    }
+} // добавим на все кнопки EventListener
+
+let setPaginationBtnOnPage = (function () {
+    return function (item, items, restaurants) {
+        let table = document.getElementById('table-restaurant');
+        let pageNum = +item.innerHTML; //Номер страницы, с помощью которого будут отображены данные
+        if (items.length > 4) { renderLargePagination(+item.innerHTML, items, restaurants); } //Пагинация с большим количетвом страниц
+        let start = (pageNum - 1) * 20;
+        let end = start + 20;
+        let notes = restaurants.slice(start, end); //Данные, которые необходимо отобразить
+        table.innerHTML = " ";
+        for (let note of notes) {
+            table.append(createTableRestarauntsElement(note));
+        }
+    };
+}());
+
+function renderFirstlyPagination(items, restaurants) {
+    let pagination = document.getElementById('pagination');
+    const countBtn = 4; // количество кнопок в пагинации
+    const strOnPage = 20; // количество строк в таблице
+    const numOfBtn = Math.ceil(restaurants.length / strOnPage) // количество кнопок
+    if (numOfBtn <= countBtn) {
+        for (let i = 0; i < numOfBtn; i++) {
+            pagination.appendChild(items[i]);
+        }
+    } else {
+        for (let i = 0; i < countBtn; i++) {
+            pagination.appendChild(items[i]);
+        }
+        pagination.appendChild(items[numOfBtn - 1]);
+    }
+}
+
+function dotsOnPagination() {
+    let dotsOnPag = document.createElement('p');
+    dotsOnPag.innerHTML = '__';
+    dotsOnPag.classList.add('fw-bold', 'mt-auto', 'mb-0', 'mx-2');
+    return dotsOnPag;
+} // создание объекта для троеточия в пагинации
+
+function renderLargePagination(b, items, restaurants) {
+    let pagination = document.getElementById('pagination');
+    const countBtn = 4;
+    const strOnPage = 20; // количество строк в таблице
+    const numOfBtn = Math.ceil(restaurants.length / strOnPage) // количество кнопок
+    let dotsOnPag1 = dotsOnPagination();
+    let dotsOnPag2 = dotsOnPagination();
+    let dotsOnPag3 = dotsOnPagination();
+    let dotsOnPag4 = dotsOnPagination();
+    // Случай: 1 2 3 4...25
+    if (b <= countBtn - 1) {
+        pagination.innerHTML = " ";
+        for (let i = 0; i < countBtn; i++) {
+            pagination.appendChild(items[i]);
+        }
+        pagination.appendChild(dotsOnPag1);
+        pagination.appendChild(items[numOfBtn - 1]);
+    }
+    // Случай: 1...22 23 24 25
+    else if (b >= numOfBtn - (countBtn - 1) + 1) {
+        pagination.innerHTML = " ";
+        pagination.appendChild(items[0]);
+        pagination.appendChild(dotsOnPag2);
+        for (let i = numOfBtn - (countBtn - 1) - 1; i < numOfBtn; i++) {
+            pagination.appendChild(items[i]);
+        }
+    }
+    // Случай: 1...2 3 4...5
+    else {
+        pagination.innerHTML = " ";
+        pagination.appendChild(items[0]);
+        pagination.appendChild(dotsOnPag3);
+        for (let i = -2; i <= 0; i++) {
+            pagination.appendChild(items[b + i]);
+        }
+        pagination.appendChild(dotsOnPag4);
+        pagination.appendChild(items[numOfBtn - 1]);
+    }
+}
 
 window.onload = function () {
     downloadData();
     downloadForm()
         .then(downloadData => dataSort(downloadData))
         .then(restaurants => renderTableRestaraunts(restaurants));
+    let searchBtn = document.querySelector('.search-btn');
+    searchBtn.addEventListener('click', clickHandlerBtn);
+    document.getElementById('adminArea').onchange = function () {
+        let selectedAdmArea = document.getElementById("adminArea").options.selectedIndex;
+        let selectedAdmAreaText = document.getElementById("adminArea").options[selectedAdmArea].text;
+        if (selectedAdmAreaText != "Не выбрано") downloadForm()
+            .then(downloadData => renderNewDistrictList(downloadData, selectedAdmAreaText))
+        else downloadForm()
+            .then(downloadData => renderDistrictList(downloadData));
+    }
 }

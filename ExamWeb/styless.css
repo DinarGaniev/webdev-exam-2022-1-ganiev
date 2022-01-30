@@ -62,3 +62,8 @@ body {
 .footer i{
     color: red;
 }
+
+.nav-link:hover{
+    background-color: red;
+    color: #cd853f!important;
+}

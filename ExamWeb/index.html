@@ -18,31 +18,31 @@
 <body>
     <header class="header sticky-lg-top border-bottom border-4">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
+            <div class="container-fluid d-flex flex-lg-row flex-column">
                 <a class="navbar-brand d-flex align-items-center mx-auto" href="#">
                     <img src="Images/Millenium Falcon.png" alt="" width="100" height="auto"
                         class="d-inline-block border rounded-circle me-3">
                     Сокол Тысячелетия
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto row-cols-lg-5 align-items-lg-center">
-                        <li class="nav-item text-lg-center">
+                </button> -->
+                <div>
+                    <ul class="navbar-nav ms-auto flex-lg-row flex-column row-cols-lg-5 align-items-lg-center text-center fw-bold">
+                        <li class="text-lg-center">
                             <a class="nav-link" href="#benefits">Преимущества нашей доставки</a>
                         </li>
-                        <li class="nav-item text-lg-center">
+                        <li class="text-lg-center">
                             <a class="nav-link" href="#restaurants">Предприятия общественного питания</a>
                         </li>
-                        <li class="nav-item text-lg-center">
+                        <li class="text-lg-center">
                             <a class="nav-link" href="#menu">Меню</a>
                         </li>
-                        <li class="nav-item text-lg-center">
+                        <li class="text-lg-center">
                             <a class="nav-link" href="#additional-options">Опции</a>
                         </li>
-                        <li class=" nav-item text-lg-center">
+                        <li class="text-lg-center">
                             <a class="nav-link" href="#">Административная панель</a>
                         </li>
                     </ul>
@@ -204,11 +204,14 @@
             </div>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="card d-none">
-                    <img src="Images/cardIMG.jpg" class="card-img-top" alt="...">
+                    <img src="Images/cardIMG.jpg" class="card-img-top d-flex align-items-center justify-content-center"
+                        alt="...">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Карточка №</h5>
-                        <p class="card-text text-center">Краткое описание</p>
-                        <h5 class="card-cost text-center fw-bold">100 P</h5>
+                        <div class="border border-2 rounded">
+                            <h5 class="card-title text-center border-bottom border-2 text-center">Карточка №</h5>
+                            <p class="card-text">Краткое описание</p>
+                            <h5 class="card-cost text-center fw-bold  border-top border-2">100 P</h5>
+                        </div>
                         <div class="my-3 d-flex justify-content-evenly">
                             <button class="btn border border-2" id="btn-minus">-</button>
                             <input class="w-25 border border-2" type="text" placeholder="0" disabled>
@@ -217,7 +220,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center align-items-center" id="menu">
+            <div class=" justify-content-center row row-cols-lg-4 row-cols-md-2 row-cols-1" id="menu">
             </div>
         </section>
         <section class="additional-options py-5" id="additional-options">
@@ -245,7 +248,7 @@
     </main>
 
     <footer class="footer border-top border-4">
-        <div class="container text-center py-3">
+        <div class="container text-center py-3 fw-bold">
             <p>OOO "Сокол Тысячелетия"</p>
             <div class="row row-cols-lg-3 row-cols-1">
                 <div class="col">

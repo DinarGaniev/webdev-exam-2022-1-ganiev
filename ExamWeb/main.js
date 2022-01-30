@@ -416,6 +416,7 @@ let setPaginationBtnOnPage = (function () {
         for (let note of notes) {
             table.append(createTableRestarauntsElement(note));
         }
+        takeIdOfPlace();
     };
 }());
 
@@ -489,17 +490,17 @@ async function downloadPlaceById(id) {
     return jsonData;
 }
 
-function clickHandlerChoiceBtn(event) {
+function clickHandlerBtnSelect(event) {
     let placeRow = event.target.closest('.place-row');
-    let rowId = placeRow.getAttribute('restaurant-id');
-    downloadPlaceById(rowId)
-        .then(menuItem => takePricesById(menuItem))
-        .then(arrayPrices => takeJsonInfo(arrayPrices, rowId));
+    let placeId = placeRow.getAttribute('restaurant-id');
+    downloadPlaceById(placeId)
+        .then(menuElem => takePricesById(menuElem))
+        .then(arraySet => takeJsonInfo(arraySet, placeId));
 }
 
 function takeIdOfPlace() {
     for (let btn of document.querySelectorAll('.place-row')) {
-        btn.onclick = clickHandlerChoiceBtn;
+        btn.onclick = clickHandlerBtnSelect;
     }
 }
 
@@ -508,44 +509,44 @@ function takeIdOfPlace() {
 ////////////////////////////////////////
 
 function takePricesById(data) {
-    let arrayPrices = [];
-    arrayPrices.push(data.set_1);
-    arrayPrices.push(data.set_2);
-    arrayPrices.push(data.set_3);
-    arrayPrices.push(data.set_4);
-    arrayPrices.push(data.set_5);
-    arrayPrices.push(data.set_6);
-    arrayPrices.push(data.set_7);
-    arrayPrices.push(data.set_8);
-    arrayPrices.push(data.set_9);
-    arrayPrices.push(data.set_10);
-    return arrayPrices;
+    let arraySet = [];
+    arraySet.push(data.set_1);
+    arraySet.push(data.set_2);
+    arraySet.push(data.set_3);
+    arraySet.push(data.set_4);
+    arraySet.push(data.set_5);
+    arraySet.push(data.set_6);
+    arraySet.push(data.set_7);
+    arraySet.push(data.set_8);
+    arraySet.push(data.set_9);
+    arraySet.push(data.set_10);
+    return arraySet;
 }
 
 /////////////////////////////
 //////Создание карточек//////
 /////////////////////////////
 
-function takeJsonInfo(arrayPrices, rowId) {
+function takeJsonInfo(arraySet, placeId) {
     let url = './menu.json';
     downloadForm(url)
-        .then(menuData => renderMenu(arrayPrices, menuData, rowId));
+        .then(menuData => renderMenu(arraySet, menuData, placeId));
 }
 
-function renderMenu(arrayPrices, menuData, rowId) {
-    let menuWindow = document.getElementById('menu');
-    menuWindow.innerHTML = " ";
+function renderMenu(arraySet, menuData, placeId) {
+    let menu = document.getElementById('menu');
+    menu.innerHTML = " ";
     let k = 0;
     for (let data of menuData) {
         let card = document.querySelector('.card').cloneNode(true);
         card.classList.remove('d-none');
-        card.classList.add('card');
+        card.classList.add('card', 'col', 'my-2', 'mx-auto');
         card.querySelector('.card-img-top').setAttribute('src', data.menuImage)
         card.querySelector('.card-title').innerHTML = data.menuName;
         card.querySelector('.card-text').innerHTML = data.menuDesc;
-        card.querySelector('.card-cost').innerHTML = arrayPrices[k];
+        card.querySelector('.card-cost').innerHTML = arraySet[k];
         k++;
-        menuWindow.appendChild(card);
+        menu.appendChild(card);
     }
     // plusCost();
     // minusCost();

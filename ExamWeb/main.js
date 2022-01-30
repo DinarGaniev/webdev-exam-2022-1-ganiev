@@ -483,6 +483,77 @@ function renderLargePagination(b, items, restaurants) {
     }
 }
 
+async function downloadPlaceById(id) {
+    let url = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants/" + id + "?api_key=2148a255-3abb-47c7-835c-9b499bb17e42";
+    let jsonData = await serverRequest(url);
+    return jsonData;
+}
+
+function clickHandlerChoiceBtn(event) {
+    let placeRow = event.target.closest('.place-row');
+    let rowId = placeRow.getAttribute('restaurant-id');
+    downloadPlaceById(rowId)
+        .then(menuItem => takePricesById(menuItem))
+        .then(arrayPrices => takeJsonInfo(arrayPrices, rowId));
+}
+
+function takeIdOfPlace() {
+    for (let btn of document.querySelectorAll('.place-row')) {
+        btn.onclick = clickHandlerChoiceBtn;
+    }
+}
+
+////////////////////////////////////////
+//////Получение цен сетов для меню//////
+////////////////////////////////////////
+
+function takePricesById(data) {
+    let arrayPrices = [];
+    arrayPrices.push(data.set_1);
+    arrayPrices.push(data.set_2);
+    arrayPrices.push(data.set_3);
+    arrayPrices.push(data.set_4);
+    arrayPrices.push(data.set_5);
+    arrayPrices.push(data.set_6);
+    arrayPrices.push(data.set_7);
+    arrayPrices.push(data.set_8);
+    arrayPrices.push(data.set_9);
+    arrayPrices.push(data.set_10);
+    return arrayPrices;
+}
+
+/////////////////////////////
+//////Создание карточек//////
+/////////////////////////////
+
+function takeJsonInfo(arrayPrices, rowId) {
+    let url = './menu.json';
+    downloadForm(url)
+        .then(menuData => renderMenu(arrayPrices, menuData, rowId));
+}
+
+function renderMenu(arrayPrices, menuData, rowId) {
+    let menuWindow = document.getElementById('menu');
+    menuWindow.innerHTML = " ";
+    let k = 0;
+    for (let data of menuData) {
+        let card = document.querySelector('.card').cloneNode(true);
+        card.classList.remove('d-none');
+        card.classList.add('card');
+        card.querySelector('.card-img-top').setAttribute('src', data.menuImage)
+        card.querySelector('.card-title').innerHTML = data.menuName;
+        card.querySelector('.card-text').innerHTML = data.menuDesc;
+        card.querySelector('.card-cost').innerHTML = arrayPrices[k];
+        k++;
+        menuWindow.appendChild(card);
+    }
+    // plusCost();
+    // minusCost();
+    // document.querySelector('.btn-order').onclick = function () {
+    //     clickHandlerPrepareModalContent(rowId);
+    // }
+}
+
 window.onload = function () {
     let url = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants?api_key=2148a255-3abb-47c7-835c-9b499bb17e42";
     downloadData();

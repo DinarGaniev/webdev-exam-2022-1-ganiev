@@ -137,7 +137,7 @@ function renderTableRestaraunts(restaurants) {
 function createTableRestarauntsElement(restaurant) {
     let itemTableRestaurants = document.createElement('tr');
     let restaurantId = restaurant.id;
-    itemTableRestaurants.classList.add('align-middle','place-row');
+    itemTableRestaurants.classList.add('align-middle', 'place-row');
     itemTableRestaurants.classList.add('border-2');
     itemTableRestaurants.setAttribute('restaurant-id', restaurantId);
     itemTableRestaurants.append(createElementName(restaurant));
@@ -442,7 +442,7 @@ function dotsOnPagination() {
     dotsOnPag.innerHTML = '__';
     dotsOnPag.classList.add('fw-bold', 'mt-auto', 'mb-0', 'mx-2');
     return dotsOnPag;
-}  
+}
 
 function renderLargePagination(b, items, restaurants) {
     let pagination = document.getElementById('pagination');
@@ -548,12 +548,40 @@ function renderMenu(arraySet, menuData, placeId) {
         k++;
         menu.appendChild(card);
     }
-    // plusCost();
-    // minusCost();
-    // document.querySelector('.btn-order').onclick = function () {
-    //     clickHandlerPrepareModalContent(rowId);
-    // }
+    plusSet();
+    minusSet();
 }
+
+function plusSet() {
+    for (let btn of document.querySelectorAll('.btn-plus')) {
+        btn.onclick = clickHandlerBtnPlus;
+    }
+}
+
+function clickHandlerBtnPlus(event) {
+    event.target.parentNode.querySelector('.input').stepUp();
+    let closestCard = event.target.closest('.card-body');
+    let costMenu = closestCard.querySelector('.card-cost').innerHTML;
+    document.getElementById('final-cost').innerHTML = +document.getElementById('final-cost').innerHTML + +costMenu;
+}
+
+function minusSet() {
+    for (let btn of document.querySelectorAll('.btn-minus')) {
+        btn.onclick = clickHandlerBtnMinus;
+    }
+}
+
+function clickHandlerBtnMinus(event) {
+    if (event.target.parentNode.querySelector('.input').value != 0) {
+        event.target.parentNode.querySelector('.input').stepDown();
+        let closestCard = event.target.closest('.card-body');
+        let costMenu = closestCard.querySelector('.card-cost').innerHTML;
+        document.getElementById('final-cost').innerHTML = +document.getElementById('final-cost').innerHTML - +costMenu;
+    }
+
+}
+
+
 
 window.onload = function () {
     let url = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants?api_key=2148a255-3abb-47c7-835c-9b499bb17e42";

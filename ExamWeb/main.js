@@ -551,10 +551,6 @@ function clickHandlerBtnMinus(event) {
         let costMenu = closestCard.querySelector('.card-cost').innerHTML;
         document.getElementById('final-cost').innerHTML = +document.getElementById('final-cost').innerHTML - +costMenu;
     }
-    if (document.getElementById('final-cost').innerHTML == 0) {
-        document.querySelector('.btn-order').setAttribute('disabled', 'true');
-    }
-
 }
 
 //Функция для чекбокса социальная скидка//

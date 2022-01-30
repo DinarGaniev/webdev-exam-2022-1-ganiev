@@ -464,6 +464,7 @@ async function downloadPlaceById(id) {
 }
 
 function clickHandlerBtnSelect(event) {
+    document.getElementById('final-cost').innerHTML = 0;
     let placeRow = event.target.closest('.place-row');
     let placeId = placeRow.getAttribute('restaurant-id');
     downloadPlaceById(placeId)

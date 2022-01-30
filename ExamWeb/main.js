@@ -541,7 +541,7 @@ function renderMenu(arraySet, menuData, placeId) {
         let card = document.querySelector('.card').cloneNode(true);
         card.classList.remove('d-none');
         card.classList.add('card', 'col', 'my-2', 'mx-auto');
-        card.querySelector('.card-img-top').setAttribute('src', data.menuImage)
+        card.querySelector('.card-img-top').setAttribute('src', data.menuImg)
         card.querySelector('.card-title').innerHTML = data.menuName;
         card.querySelector('.card-text').innerHTML = data.menuDesc;
         card.querySelector('.card-cost').innerHTML = arraySet[k];

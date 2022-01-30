@@ -67,3 +67,8 @@ body {
     background-color: red;
     color: #cd853f!important;
 }
+
+.card-elem {
+    width: 226px;
+    height: 180px;
+}

@@ -197,27 +197,15 @@ function getSelect(data) {
     let selectAdmArea = document.getElementById('adminArea').options.selectedIndex;
     let selectAdmAreaTxt = document.getElementById('adminArea').options[selectAdmArea].text;
     arrayFilter.set('admArea', selectAdmAreaTxt);
-    // if (selectAdmAreaTxt != "Не выбрано") {
-    //     arrayFilter.set('admArea', selectAdmAreaTxt)
-    // };
     let selectDistrict = document.getElementById('district').options.selectedIndex;
     let selectDistrictTxt = document.getElementById('district').options[selectDistrict].text;
     arrayFilter.set('district', selectDistrictTxt);
-    // if (selectDistrictTxt != "Не выбрано") {
-    //     arrayFilter.set('district', selectDistrictTxt)
-    // };
     let selectType = document.getElementById('type').options.selectedIndex;
     let selectTypeTxt = document.getElementById('type').options[selectType].text;
     arrayFilter.set('typeObject', selectTypeTxt)
-    // if (selectTypeTxt != "Не выбрано") {
-    //     arrayFilter.set('typeObject', selectTypeTxt)
-    // };
     let selectSocial = document.getElementById('discount').options.selectedIndex;
     let selectSocialTxt = document.getElementById('discount').options[selectSocial].text;
     arrayFilter.set('socialPrivileges', selectSocialTxt)
-    // if (selectSocialTxt != "Не выбрано") {
-    //     arrayFilter.set('socialPrivileges', selectSocialTxt)
-    // };
     renderNewTable(data, arrayFilter);
 }
 
@@ -310,20 +298,7 @@ function renderNewTable(restaurants, arrayFilter) {
             arrayType.includes(restaurant.typeObject) &&
             arraySocial.includes(String(restaurant.socialPrivileges))) {
             newDataSort.push(restaurant);
-            // tableRestaraunts.append(createTableRestarauntsElement(restaurant));
         }
-        // if (i == 20) {
-        //     break;
-        // } else {
-        //     if (arrayAdmArea.includes(restaurant.admArea) &&
-        //         arrayDistrict.includes(restaurant.district) &&
-        //         arrayType.includes(restaurant.typeObject) &&
-        //         arraySocial.includes(String(restaurant.socialPrivileges))) {
-        //         newDataSort.push(restaurant);
-        //         // tableRestaraunts.append(createTableRestarauntsElement(restaurant));
-        //         i++;
-        //     }
-        // }
     }
     renderPaginationBtn(newDataSort);
 }
@@ -366,12 +341,9 @@ function renderPaginationBtn(restaurants) {
     let pagination = document.getElementById('pagination');
     let items = [];
     for (let i = 1; i <= numOfBtn; i++) {
-        // let liBtn = document.createElement('li');
-        // liBtn.classList.add('page-item')
         let btn = document.createElement('button');
         btn.classList.add('btn', 'btn-primary', 'm-2');
         btn.innerHTML = i;
-        // items.push(liBtn);
         items.push(btn);
     }
     renderFirstlyPagination(items, restaurants);
@@ -487,6 +459,7 @@ function renderLargePagination(b, items, restaurants) {
 async function downloadPlaceById(id) {
     let url = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants/" + id + "?api_key=2148a255-3abb-47c7-835c-9b499bb17e42";
     let jsonData = await serverRequest(url);
+    // socialPrivileges(jsonData);
     return jsonData;
 }
 
@@ -504,10 +477,7 @@ function takeIdOfPlace() {
     }
 }
 
-////////////////////////////////////////
-//////Получение цен сетов для меню//////
-////////////////////////////////////////
-
+//Получение цен сетов для меню//
 function takePricesById(data) {
     let arraySet = [];
     arraySet.push(data.set_1);
@@ -523,10 +493,8 @@ function takePricesById(data) {
     return arraySet;
 }
 
-/////////////////////////////
-//////Создание карточек//////
-/////////////////////////////
 
+//Создание карточек//
 function takeJsonInfo(arraySet, placeId) {
     let url = './menu.json';
     downloadForm(url)
@@ -550,8 +518,12 @@ function renderMenu(arraySet, menuData, placeId) {
     }
     plusSet();
     minusSet();
+    document.querySelector('.btn-order').onclick = function () {
+        clickHandlerBtnOrder(placeId);
+    }
 }
 
+//Функция для кнопок + и - //
 function plusSet() {
     for (let btn of document.querySelectorAll('.btn-plus')) {
         btn.onclick = clickHandlerBtnPlus;
@@ -578,9 +550,68 @@ function clickHandlerBtnMinus(event) {
         let costMenu = closestCard.querySelector('.card-cost').innerHTML;
         document.getElementById('final-cost').innerHTML = +document.getElementById('final-cost').innerHTML - +costMenu;
     }
+    if (document.getElementById('final-cost').innerHTML == 0) {
+        document.querySelector('.btn-order').setAttribute('disabled', 'true');
+    }
 
 }
 
+//Функция для чекбокса социальная скидка//
+// function socialPrivileges(jsonData) {
+//     if (jsonData.socialPrivileges == true) {
+//         document.getElementById('soc-privileges').setAttribute('checked', 'true');
+//         document.getElementById('soc-privileges').remove('disabled');
+
+//     }
+//     else {
+//         document.getElementById('soc-privileges').setAttribute('disabled', 'true');
+//         document.getElementById('soc-privileges').remove('checked');
+//     }
+// }
+
+function clickHandlerBtnOrder(placeId) {
+    let choosenDish = document.querySelector('.dish');
+    choosenDish.innerHTML = " ";
+    let modalDish = document.querySelectorAll('.card');
+    for (let dish of modalDish) {
+        if (dish.querySelector('.input').value != 0) {
+            let modalCard = document.querySelector('.card-dish').cloneNode(true);
+            modalCard.classList.remove('d-none', '.card-dish');
+            let img = dish.querySelector('.card-img-top').getAttribute('src');
+            modalCard.querySelector('.dish-img').setAttribute('src', img);
+            modalCard.querySelector('.dish-name').innerHTML = dish.querySelector('.card-title').innerHTML;
+            modalCard.querySelector('.dish-price').innerHTML = dish.querySelector('.card-cost').innerHTML + ' x ' + dish.querySelector('.input').value;
+            modalCard.querySelector('.dish-total').innerHTML = +dish.querySelector('.card-cost').innerHTML * +dish.querySelector('.input').value;
+            choosenDish.appendChild(modalCard);
+        }
+    }
+    downloadPlaceById(placeId)
+        .then(data => renderModal(data));
+}
+
+function renderModal(jsonData) {
+    document.querySelector('.modal-name').innerHTML = jsonData.name;
+    document.querySelector('.modal-adm-okrug').innerHTML = jsonData.admArea;
+    document.querySelector('.modal-district').innerHTML = jsonData.district;
+    document.querySelector('.modal-address').innerHTML = jsonData.address;
+    document.querySelector('.modal-rating').innerHTML = jsonData.rate;
+    document.getElementById('modal-final-cost').innerHTML = document.getElementById('final-cost').innerHTML;
+    if (document.getElementById('soc-privileges').checked) {
+        document.getElementById('restaurant-social').innerHTML = "Скидка " + jsonData.socialDiscount + " %";
+        document.getElementById('modal-final-cost').innerHTML = document.getElementById('modal-final-cost').innerHTML * (100 - +jsonData.socialDiscount) / 100;
+    } else {
+        document.getElementById('restaurant-social').innerHTML = "Нет";
+    }
+
+    if (document.getElementById('fast-delivery').checked) {
+        document.getElementById('quick-delivery').innerHTML = "Цена вашего заказа увеличится на 20%.";
+        let cost = +document.getElementById('modal-final-cost').innerHTML;
+        let finalCost = cost + cost*0.2;
+        document.getElementById('modal-final-cost').innerHTML = finalCost;
+    } else {
+        document.getElementById('quick-delivery').innerHTML = 'Нет';
+    }
+}
 
 
 window.onload = function () {

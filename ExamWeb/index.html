@@ -29,7 +29,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button> -->
                 <div>
-                    <ul class="navbar-nav ms-auto flex-lg-row flex-column row-cols-lg-5 align-items-lg-center text-center fw-bold">
+                    <ul
+                        class="navbar-nav ms-auto flex-lg-row flex-column row-cols-lg-5 align-items-lg-center text-center fw-bold">
                         <li class="text-lg-center">
                             <a class="nav-link" href="#benefits">Преимущества нашей доставки</a>
                         </li>
@@ -91,7 +92,7 @@
 
         <section class="benefits py-5 container" id="benefits">
             <div class="container text-center">
-                <h2 class="mb-3">Преимущества нашей доставки</h2>
+                <h2 class="mb-3 fw-bold">Преимущества нашей доставки</h2>
                 <div class="heading-line mx-auto mb-3"></div>
             </div>
 
@@ -126,7 +127,7 @@
 
         <section class="restaurants py-5" id="restaurants">
             <div class="container text-center">
-                <h2 class="mb-3">Предприятия общественного питания</h2>
+                <h2 class="mb-3 fw-bold">Предприятия общественного питания</h2>
                 <div class="heading-line mx-auto mb-3"></div>
             </div>
             <section class="search border border-2 rounded container">
@@ -199,13 +200,13 @@
 
         <section class="menu container py-5">
             <div class="text-center">
-                <h2 class="mb-3">Меню</h2>
+                <h2 class="mb-3 fw-bold">Меню</h2>
                 <div class="heading-line mx-auto mb-3"></div>
             </div>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="card d-none">
-                    <img src="Images/cardIMG.jpg" class="card-img-top mt-2 d-flex align-items-center justify-content-center"
-                        alt="...">
+                    <img src="Images/cardIMG.jpg"
+                        class="card-img-top mt-2 d-flex align-items-center justify-content-center" alt="...">
                     <div class="card-body">
                         <div class="border card-elem d-flex flex-column justify-content-between border-2 rounded">
                             <h5 class="card-title text-center border-bottom border-2 text-center">Карточка №</h5>
@@ -214,7 +215,8 @@
                         </div>
                         <div class="my-3 d-flex justify-content-evenly">
                             <button class="btn border border-2 btn-minus" id="btn-minus">-</button>
-                            <input class="w-25 border border-2 input" type="number" name="quantity" min="0" placeholder="0">
+                            <input class="w-25 border border-2 input" type="number" name="quantity" min="0"
+                                placeholder="0" disabled>
                             <button class="btn border border-2 btn-plus" id="btn-plus">+</button>
                         </div>
                     </div>
@@ -225,21 +227,77 @@
         </section>
         <section class="additional-options py-5" id="additional-options">
             <div class="text-center container">
-                <h2 class="mb-3">Опции</h2>
+                <h2 class="mb-3 fw-bold">Опции</h2>
                 <div class="heading-line mx-auto mb-3"></div>
                 <div class="d-flex flex-column w-50 mx-auto">
                     <div class="d-flex mb-1 justify-content-between border-bottom border-2">
-                        <label class="form-check-label" for="IAmAStudent">Быстрая доставка</label>
-                        <input class="my-auto ms-3" type="checkbox" id="IAmAStudent">
+                        <label class="form-check-label" for="FastDelivery">Быстрая доставка</label>
+                        <input class="my-auto ms-3" type="checkbox" id="fast-delivery">
                     </div>
                     <div class="d-flex py-1 justify-content-between">
-                        <label class="form-check-label" for="FastDelivery">Социальная скидка</label>
-                        <input class="my-auto ms-3" type="checkbox" id="FastDelivery">
+                        <label class="form-check-label" for="socPrivileges">Социальная скидка</label>
+                        <input class="my-auto ms-3" type="checkbox" id="soc-privileges" >
                     </div>
                     <div class="border border-2 rounded pt-1">
                         <div class="px-2 d-flex justify-content-between flex-lg-row flex-column">
-                            <p class="my-auto">К оплате: <span id="final-cost"></span></p>
-                            <button class="btn border btn-primary my-2" type="button">Оформить заказ</button>
+                            <p class="my-auto">Сумма: <span id="final-cost"></span></p>
+                            <button class="btn border btn-primary my-2 btn-order" type="button" data-bs-toggle="modal"
+                                data-bs-target="#modal-order">Оформить заказ</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal fade" id="modal-order" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="modal-order" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="staticBackdropLabel">Оформление заказ</h2>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 class="fw-bold border-2 border-bottom">Позиции заказ</h4>
+                            <div
+                                class="d-flex row-cols-4 border rounded border-2 align-items-center justify-content-between d-none card-dish mb-2">
+                                <div class="col">
+                                    <img src="Images/cardIMG.jpg"
+                                        class="d-flex align-items-center dish-img card-img-top py-1 px-1" alt="...">
+                                </div>
+                                <div class="col fw-bold dish-name">
+                                    <h4>Мясо</h4>
+                                </div>
+                                <div class="col dish-price">
+                                    <h6>100 x 2</h6>
+                                </div>
+                                <div class="col dish-total">
+                                    <h5>200</h5>
+                                </div>
+                            </div>
+                            <div class="dish my-1"></div>
+                            <div>
+                                <h4 class="fw-bold py-1 border-2 border-bottom">Опции</h4>
+                                <div class="d-flex flex-column align-items-start">
+                                    <h5>Быстрая доставка:<span id="quick-delivery"></span></h5>
+                                    <h5>Социальная скидка:<span id="restaurant-social"></span></h5>
+                                </div>
+                            </div>
+                            <div class="place-information">
+                                <h5 class="fw-bold border-2 border-bottom">Информация о предприятии</h5>
+                                <div class="d-flex flex-column align-items-start">
+                                    <h6>Название: <span class="modal-name"></span></h6>
+                                    <h6>Административный округ: <span class="modal-adm-okrug"></span></h6>
+                                    <h6>Район: <span class="modal-district"></span></h6>
+                                    <h6>Адрес: <span class="modal-address"></span></h6>
+                                    <h6>Рейтинг: <span class="modal-rating"></span></h6>
+                                </div>
+                            </div>
+                            <h5 class="fw-bold py-3 border-2 border-bottom">К оплате: <span id="modal-final-cost"></span>
+                            </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                            <button type="button" class="btn btn-primary">Потдвердить</button>
                         </div>
                     </div>
                 </div>
@@ -263,7 +321,6 @@
                     <a href="https://ru-ru.facebook.com/"><i class="bi bi-facebook px-1 fs-1"></i></a>
                     <a href="https://www.instagram.com/"><i class="bi bi-instagram px-1 fs-1"></i></a>
                 </div>
-
             </div>
         </div>
     </footer>

@@ -336,8 +336,8 @@ function EmptyDistrictListItem() {
 
 //Пагинаця//
 function renderPaginationBtn(restaurants) {
-    const strOnPage = 20; // количество строк в таблице
-    const numOfBtn = Math.ceil(restaurants.length / strOnPage) // количество кнопок
+    const strOnPage = 20; 
+    const numOfBtn = Math.ceil(restaurants.length / strOnPage);
     let pagination = document.getElementById('pagination');
     let items = [];
     for (let i = 1; i <= numOfBtn; i++) {
@@ -394,9 +394,9 @@ let setPaginationBtnOnPage = (function () {
 
 function renderFirstlyPagination(items, restaurants) {
     let pagination = document.getElementById('pagination');
-    const countBtn = 4; // количество кнопок в пагинации
-    const strOnPage = 20; // количество строк в таблице
-    const numOfBtn = Math.ceil(restaurants.length / strOnPage) // количество кнопок
+    const countBtn = 4; 
+    const strOnPage = 20;
+    const numOfBtn = Math.ceil(restaurants.length / strOnPage) 
     if (numOfBtn <= countBtn) {
         for (let i = 0; i < numOfBtn; i++) {
             pagination.appendChild(items[i]);
@@ -419,8 +419,8 @@ function dotsOnPagination() {
 function renderLargePagination(b, items, restaurants) {
     let pagination = document.getElementById('pagination');
     const countBtn = 4;
-    const strOnPage = 20; // количество строк в таблице
-    const numOfBtn = Math.ceil(restaurants.length / strOnPage) // количество кнопок
+    const strOnPage = 20; 
+    const numOfBtn = Math.ceil(restaurants.length / strOnPage) 
     let dotsOnPag1 = dotsOnPagination();
     let dotsOnPag2 = dotsOnPagination();
     let dotsOnPag3 = dotsOnPagination();

@@ -459,7 +459,7 @@ function renderLargePagination(b, items, restaurants) {
 async function downloadPlaceById(id) {
     let url = "http://exam-2022-1-api.std-900.ist.mospolytech.ru/api/restaurants/" + id + "?api_key=2148a255-3abb-47c7-835c-9b499bb17e42";
     let jsonData = await serverRequest(url);
-    // socialPrivileges(jsonData);
+    socialPrivileges(jsonData);
     return jsonData;
 }
 
@@ -554,17 +554,17 @@ function clickHandlerBtnMinus(event) {
 }
 
 //Функция для чекбокса социальная скидка//
-// function socialPrivileges(jsonData) {
-//     if (jsonData.socialPrivileges == true) {
-//         document.getElementById('soc-privileges').setAttribute('checked', 'true');
-//         document.getElementById('soc-privileges').remove('disabled');
+function socialPrivileges(jsonData) {
+    if (jsonData.socialPrivileges == true) {
+        document.getElementById('soc-privileges').setAttribute('checked', 'true');
+        document.getElementById('soc-privileges').removeAttribute('disabled');
 
-//     }
-//     else {
-//         document.getElementById('soc-privileges').setAttribute('disabled', 'true');
-//         document.getElementById('soc-privileges').remove('checked');
-//     }
-// }
+    }
+    else {
+        document.getElementById('soc-privileges').setAttribute('disabled', 'true');
+        document.getElementById('soc-privileges').removeAttribute('checked');
+    }
+}
 
 function clickHandlerBtnOrder(placeId) {
     let choosenDish = document.querySelector('.dish');
